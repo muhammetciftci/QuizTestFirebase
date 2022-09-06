@@ -13,6 +13,14 @@
         android:background="#f2f2f2"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_margin="25dp"
+            android:id="@+id/questionScoreText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Score: 0" />
 
         <TextView
             android:layout_margin="50dp"
@@ -23,27 +31,31 @@
             android:text="Question" />
 
         <Button
-            android:id="@+id/choice1"
+            android:id="@+id/choice1Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="clickChoice1Button"
             android:text="Choice1" />
 
         <Button
-            android:id="@+id/choice2"
+            android:id="@+id/choice2Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="clickChoice2Button"
             android:text="Choice2" />
 
         <Button
-            android:id="@+id/choice3"
+            android:id="@+id/choice3Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="clickChoice3Button"
             android:text="Choice2" />
 
         <Button
-            android:id="@+id/choice4"
+            android:id="@+id/choice4Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="clickChoice4Button"
             android:text="Choice2" />
 
 
@@ -53,7 +65,7 @@
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:onClick="getNewQuest"
+            android:onClick="clickNewQuestionButton"
             android:text="New Question" />
     </LinearLayout>
 
