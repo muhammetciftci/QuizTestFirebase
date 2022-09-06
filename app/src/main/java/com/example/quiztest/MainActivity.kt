@@ -1,6 +1,7 @@
 package com.example.quiztest
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
 import android.view.View
 import android.widget.Toast
@@ -29,6 +30,17 @@ class MainActivity : AppCompatActivity() {
 
 
 
+        object : CountDownTimer(2000,1000)
+        {
+            override fun onTick(millisUntilFinished: Long) {
+                getFirebaseData()
+            }
+
+            override fun onFinish() {
+                getNewQuestion()
+            }
+
+        }.start()
 
 
         getFirebaseData()
