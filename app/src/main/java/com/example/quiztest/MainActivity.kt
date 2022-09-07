@@ -30,20 +30,13 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        object : CountDownTimer(2000,1000)
-        {
-            override fun onTick(millisUntilFinished: Long) {
-                getFirebaseData()
-            }
-
-            override fun onFinish() {
-                getNewQuestion()
-            }
-
-        }.start()
-
-
         getFirebaseData()
+
+
+
+
+
+
 
 
 
@@ -180,17 +173,29 @@ class MainActivity : AppCompatActivity() {
 
         questModelList = arrayListOf<QuestionModel>()
 
+        var count = 0;
+
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
+
                 for (dataSnapShot: DataSnapshot in snapshot.children) {
+                    count++
                     var modelClass: QuestionModel? =
                         dataSnapShot.getValue(QuestionModel::class.java)
+
                     if (modelClass != null) {
                         questModelList.add(modelClass)
-                    } else {
+                        if (count >= snapshot.childrenCount){
+                            getNewQuestion()
+                        }
+                    }
+                    else {
                         Toast.makeText(applicationContext, "Model is empty", Toast.LENGTH_LONG)
                     }
+
+
+
                 }
             }
 
