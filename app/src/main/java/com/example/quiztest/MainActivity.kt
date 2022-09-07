@@ -1,5 +1,6 @@
 package com.example.quiztest
 
+import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -7,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.quiztest.databinding.ActivityMainBinding
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.database.*
 import kotlinx.coroutines.*
 import java.util.*
@@ -28,19 +30,7 @@ class MainActivity : AppCompatActivity() {
         val view: View = binding.root
         setContentView(view)
 
-
-
         getFirebaseData()
-
-
-
-
-
-
-
-
-
-
 
 
     }
@@ -50,11 +40,14 @@ class MainActivity : AppCompatActivity() {
     fun clickChoice1Button(view: View) {
 
         if (currentAnswer == binding.choice1Button.text) {
+            buttonsClickableFalse()
+            binding.choice1Button.setBackgroundColor(Color.GREEN)
             score++
             binding.questionScoreText.text = "Score: " + score
             Toast.makeText(applicationContext, "Correct answer.", Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(applicationContext, "Wrong answer.", Toast.LENGTH_LONG).show()
+            binding.choice1Button.setBackgroundColor(Color.RED)
         }
 
     }
@@ -62,11 +55,14 @@ class MainActivity : AppCompatActivity() {
     fun clickChoice2Button(view: View) {
 
         if (currentAnswer == binding.choice2Button.text) {
+            buttonsClickableFalse()
+            binding.choice2Button.setBackgroundColor(Color.GREEN)
             score++
             binding.questionScoreText.text = "Score: " + score
             Toast.makeText(applicationContext, "Correct answer.", Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(applicationContext, "Wrong answer.", Toast.LENGTH_LONG).show()
+            binding.choice2Button.setBackgroundColor(Color.RED)
         }
 
     }
@@ -74,11 +70,14 @@ class MainActivity : AppCompatActivity() {
     fun clickChoice3Button(view: View) {
 
         if (currentAnswer == binding.choice3Button.text) {
+            buttonsClickableFalse()
+            binding.choice3Button.setBackgroundColor(Color.GREEN)
             score++
             binding.questionScoreText.text = "Score: " + score
             Toast.makeText(applicationContext, "Correct answer.", Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(applicationContext, "Wrong answer.", Toast.LENGTH_LONG).show()
+            binding.choice3Button.setBackgroundColor(Color.RED)
         }
 
     }
@@ -86,17 +85,21 @@ class MainActivity : AppCompatActivity() {
     fun clickChoice4Button(view: View) {
 
         if (currentAnswer == binding.choice4Button.text) {
+            buttonsClickableFalse()
+            binding.choice4Button.setBackgroundColor(Color.GREEN)
             score++
             binding.questionScoreText.text = "Score: " + score
             Toast.makeText(applicationContext, "Correct answer.", Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(applicationContext, "Wrong answer.", Toast.LENGTH_LONG).show()
+            binding.choice4Button.setBackgroundColor(Color.RED)
         }
 
     }
 
     fun clickNewQuestionButton(view:View){
         getNewQuestion()
+        buttonsClickableTrue()
     }
 
     fun getNewQuestion() {
@@ -178,7 +181,6 @@ class MainActivity : AppCompatActivity() {
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
-
                 for (dataSnapShot: DataSnapshot in snapshot.children) {
                     count++
                     var modelClass: QuestionModel? =
@@ -194,13 +196,32 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(applicationContext, "Model is empty", Toast.LENGTH_LONG)
                     }
 
-
-
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {}
         })
+
+    }
+
+    fun buttonsClickableFalse(){
+        binding.choice1Button.isClickable = false
+        binding.choice2Button.isClickable = false
+        binding.choice3Button.isClickable = false
+        binding.choice4Button.isClickable = false
+    }
+
+    fun buttonsClickableTrue(){
+        binding.choice1Button.isClickable = true
+        binding.choice2Button.isClickable = true
+        binding.choice3Button.isClickable = true
+        binding.choice4Button.isClickable = true
+
+        binding.choice1Button.setBackgroundColor(Color.BLUE)
+        binding.choice2Button.setBackgroundColor(Color.BLUE)
+        binding.choice3Button.setBackgroundColor(Color.BLUE)
+        binding.choice4Button.setBackgroundColor(Color.BLUE)
+
 
     }
 
